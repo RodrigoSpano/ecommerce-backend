@@ -24,3 +24,16 @@ export const signUp = async (req, res) => { //todo middleware para validar q no 
     });
     }
   };
+
+  export const logOut = async (req, res) => {
+    try {
+      req.session.destroy((error) => {
+        if(error) return res.status(400).json({error: error.message})
+      })
+      res.json({success: true})
+    } catch (error) {
+      return res.status(500).json({
+        error: error.message,
+      });
+    }
+  }

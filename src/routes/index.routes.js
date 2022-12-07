@@ -4,11 +4,10 @@ import authRoute from './auth/auth.js'
 
 const router = Router()
 
-
-router.get('/', passport.authenticate('jwt', {session: false}) ,(req, res) => {
+//TODO acomodar rutas
+router.get('/', passport.authenticate('jwt', {failureRedirect: '/auth/login'}) ,(req, res) => {
   res.json('your are logged')
 })
-
 
 router.use('/auth', authRoute)
 
