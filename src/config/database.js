@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
 
 const URI = process.env.MONGO_URI
-mongoose.connect(URI, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true
-})
+mongoose.set('strictQuery', false)
+mongoose.connect(URI)
   .then(() => console.log('mongodb connected'))

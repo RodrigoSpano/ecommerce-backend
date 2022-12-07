@@ -1,23 +1,12 @@
-import User from '../models/userModel.js';
+import AuthApi from '../api/auth/authApi.js';
 
+const api = new AuthApi()
 
-export const signUp = async (req, res) => {
-  const { email, password, phoneNumber, phoneArea, firstName, lastName } = req.body;
-  if (!email || !password || !phoneNumber || !phoneArea || !firstName || !lastName) {
-    return res.status(400).json({
-      error: 'complete all the fields',
-    });
-  }
+export const signUp = async (req, res) => { //todo middleware para validar q no exista el user
   try {
-    const obj = {
-      email,
-      password,
-      phone: `${phoneArea} ${phoneNumber}`,
-      name: `${firstName} ${lastName}`
-    }
-    const user = new User(obj)
-    await user.save()
-    res.json({user})
+    const data = req.body
+    const sign = await api.signUp(data)
+    sign ? res.status(200).json({sign}) : res.status(400).json({error: error.message})
   } catch (error) {
     return res.status(500).json({
       error: error.message,
@@ -26,26 +15,9 @@ export const signUp = async (req, res) => {
 };
 
   export const logIn = async (req, res) => {
-    if(!req.body.email || !req.body.password){
-      res.status(400).json({
-        error: 'complete all the fields'
-      })
-    }
     try {
-      const user = await User.findOne({ email: req.body.email })
-      if(user){
-        const isMatch = user.comparePassword(req.body.password)
-        if(isMatch){
-          const token = user.createToken()
-          return res.json({
-            user,
-            token
-          })
-        }
-      }
-      return res.status(401).json({
-        error: error.message
-      })
+      const log = await api.logIn(req.body)
+      log ? res.status(200).json({log}) : res.status(401).json({error: error.message})
     } catch (error) {
       return res.status(500).json({
       error: error.message,
