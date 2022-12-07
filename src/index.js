@@ -16,7 +16,7 @@ app.use(session({
   secret: settings.SECRET,
   resave: true,
   saveUninitialized: true,
-  store: new MongoStore({ mongoUrl: settings.SESSION_URI, mongoOptions:settings.MONGO_CONFIG }),
+  store: new MongoStore({ mongoUrl: settings.MONGO_URI, mongoOptions:settings.MONGO_CONFIG }),
   cookie:{
     maxAge: 60000
   }

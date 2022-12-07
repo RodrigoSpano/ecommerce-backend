@@ -16,6 +16,7 @@ export const signUp = async (req, res) => { //todo middleware para validar q no 
 
   export const logIn = async (req, res) => {
     try {
+
       const log = await api.logIn(req.body)
       log ? res.status(200).json({log}) : res.status(401).json({error: error.message})
     } catch (error) {
