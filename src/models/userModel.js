@@ -1,7 +1,6 @@
 import { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import settings from '../config/settings.js';
 
 const userSchema = new Schema({
   name: {
@@ -46,7 +45,7 @@ userSchema.methods.comparePassword = function(password){
 
 userSchema.methods.createToken = function(){
   const user = this
-  return jwt.sign({id: user.id, email: user.email}, settings.SECRET, {expiresIn: '60m'})
+  return jwt.sign({id: user.id, email: user.email}, process.env.JWT_SECRET, {expiresIn: '60m'})
 }
 
 export default model('User', userSchema)
