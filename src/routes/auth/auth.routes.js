@@ -1,5 +1,5 @@
 import {Router} from 'express' 
-import { alreadyExists } from '../../middlewares/middlewares.js'
+import { alreadyExists } from '../../middlewares/authMiddleware.js'
 import * as authControllers from '../../controller/authController.js'
 
 const router = Router()

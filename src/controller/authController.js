@@ -18,7 +18,7 @@ export const signUp = async (req, res) => { //todo middleware para validar q no 
     try {
 
       const log = await api.logIn(req.body)
-      log ? res.status(200).json({log}) : res.status(401).json({error: error.message})
+      log ? res.status(200).json({log}) : res.status(401).json({error: 'wrong credentials'})
     } catch (error) {
       return res.status(500).json({
       error: error.message,

@@ -28,7 +28,6 @@ class AuthDao{
           }
         }
       }
-      return new Error('unAuthorized')
     } catch (error) {
       return error
     }

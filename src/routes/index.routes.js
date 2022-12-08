@@ -1,6 +1,7 @@
 import {Router} from 'express' 
 import passport from 'passport'
-import authRoute from './auth/auth.js'
+import authRoute from './auth/auth.routes.js'
+import productsRoute from './products/products.routes.js'
 
 const router = Router()
 
@@ -10,5 +11,6 @@ router.get('/', passport.authenticate('jwt', {session: true }) ,(req, res) => {
 })
 
 router.use('/auth', authRoute)
+router.use('/products', productsRoute)
 
 export default router;
