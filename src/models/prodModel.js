@@ -20,7 +20,7 @@ const prodSchema = new Schema({
     max:360,
     strim: true
   },
-  photo: {
+  images: {
     type: Array,
     required:true,
     min: 1
@@ -29,6 +29,7 @@ const prodSchema = new Schema({
     type: Number,
     required: true,
     min: 0,
+    max: 99
   },
   category: {
     type: Array,

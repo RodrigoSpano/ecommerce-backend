@@ -1,9 +1,9 @@
 
 class ProdDto{
-  constructor({_id, title, price, photo, description, category, author, stock}){
+  constructor({_id, title, price, images, description, category, author, stock}){
     this.title = title
     this.price = price
-    this.photo = photo
+    this.images = images
     this.description = description
     this.category = category
     this.author = author

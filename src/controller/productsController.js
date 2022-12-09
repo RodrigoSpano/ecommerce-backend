@@ -16,9 +16,7 @@ export const getByCategory = async (req, res) => {
   try {
     const { category } = req.params;
     const products = await prods.getByCategory(category);
-    products
-      ? res.json({ success: true, products })
-      : res.status(404).json({ error: 'products not found' });
+      res.json({ success: true, products })
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -15,9 +15,8 @@ class ProdsDao{
 
   async getByCategory(category){
     try {
-      const prods = await Products.find({}) 
-      const filterProds = prods.filter(prod => prod.category.includes(category))
-      return asDto(filterProds)
+      const prods = await Products.find({category: category})
+      return asDto(prods)
     } catch (error) {
       return error
     }
