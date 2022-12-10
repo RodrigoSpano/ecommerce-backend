@@ -44,9 +44,8 @@ class ProdsDao{
 
   async updateOne(_id, data){
     try {
-      await Products.findOneAndUpdate({_id}, data)
-      const updatedOne = await Products.findOne({_id})
-      return asDto(updatedOne)
+      const prod = await Products.findOneAndUpdate({_id}, data,{new: true})
+      return asDto(prod)
     } catch (error) {
       return error
     }
