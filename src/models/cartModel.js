@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose'
 
-const cartSchema = new Schema({
+export const cartSchema = new Schema({
   prodId: {
     type: Schema.Types.ObjectId || String,
     required: true,
@@ -15,6 +15,6 @@ const cartSchema = new Schema({
     min:1,
     required: true
   }
-}, {timestamps: true})
+})
 
 export default model('cart', cartSchema)
