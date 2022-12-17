@@ -1,10 +1,25 @@
 import { Schema, model } from 'mongoose';
-import { cartSchema } from './cartModel';
-import { v4 as uuid} from 'uuid'
+
+const itemsOrderSchema = new Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true
+  },
+  quantity: {
+    type: Number,
+    require: true,
+    default: 1
+  },
+  productId: Schema.Types.ObjectId
+})
 
 const orderSchema = new Schema({
   products: {
-    type: [cartSchema],
+    type: [itemsOrderSchema],
     required: true
   },
   orderNumber: {
@@ -24,15 +39,11 @@ const orderSchema = new Schema({
     type: String,
     required: true,
     strim: true
+  },
+  totalPrice: {
+    type: Number,
+    required: true,
   }
 });
-
-orderSchema.pre('save', (next) => {
-  const order = this;
-  if(!order.isModified('orderNumber')) return next()
-  order.orderNumber = uuid()
-  order.date = new Date()
-  return next()
-})
 
 export default model('order', orderSchema)
