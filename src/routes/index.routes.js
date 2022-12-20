@@ -1,19 +1,17 @@
 import {Router} from 'express' 
-import passport from 'passport'
 import authRoute from './auth/auth.routes.js'
 import productsRoute from './products/products.routes.js'
 import cartRoute from './cart/cart.router.js'
 import orderRoute from './order/order.routes.js'
+import homeRoute from './home/home.routes.js'
+import { isAuth } from '../middlewares/authMiddleware.js'
+
 const router = Router()
 
-//TODO acomodar rutas
-router.get('/', passport.authenticate('jwt', {session: true }) ,(req, res) => {
-  res.json('your are logged')
-})
-
+router.use('/', homeRoute)
 router.use('/auth', authRoute)
-router.use('/products', productsRoute)
-router.use('/cart', cartRoute)
-router.use('/order', orderRoute)
+router.use('/products', isAuth, productsRoute)
+router.use('/cart', isAuth, cartRoute)
+router.use('/order', isAuth, orderRoute)
 
 export default router;

@@ -13,15 +13,20 @@ import { MONGO_CONFIG } from './utilities/helpers.js';
 
 const app = express();
 
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: true,
-  store: new MongoStore({ mongoUrl: process.env.ATLAS_URI, mongoOptions:MONGO_CONFIG }),
-  cookie:{
-    maxAge: 60000
-  }
-}))
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({
+      mongoUrl: process.env.ATLAS_URI,
+      mongoOptions: MONGO_CONFIG,
+    }),
+    cookie: {
+      maxAge: 6000000,
+    },
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

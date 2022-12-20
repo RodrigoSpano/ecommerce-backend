@@ -45,4 +45,8 @@ const prodSchema = new Schema({
   timestamps: true
 })
 
+// prodSchema.methods.updateStock = function(quantity){
+//   this.stock = this.stock - quantity
+// }
+
 export default model('product', prodSchema)
