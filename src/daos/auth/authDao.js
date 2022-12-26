@@ -19,8 +19,10 @@ class AuthDao{
     try {
       const user = await User.findOne({ email: data.email })
       if(user){
+        //use comparePassword method i create from userModel.js
         const isMatch = user.comparePassword(data.password)
         if(isMatch){
+          //use createToken method i create from userModel.js
           const token = user.createToken()
           return {
             user,

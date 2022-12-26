@@ -7,6 +7,7 @@ const order = new OrderApi();
 export const createOrder = async (req, res) => {
   try {
     let prods = [];
+    //update stock in the db
     for (const el of req.body) {
       await prodModel.updateOne(
         { _id: el.prodId },
@@ -21,6 +22,7 @@ export const createOrder = async (req, res) => {
         });
       });
     }
+    //get the pruchase total
     let total = await prods.reduce(
       (acc, el) => (acc += el.price * el.quantity),
       0

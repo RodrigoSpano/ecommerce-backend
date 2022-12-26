@@ -4,7 +4,8 @@ const api = new AuthApi()
 
 export const signUp = async (req, res) => { //todo middleware para validar q no exista el user
   try {
-    if(req.body.password !== req.body.repeatPassword) return res.status(400).json({error: 'passwords doesnt match'})
+    //i make sure password and repeat password matches
+    if(req.body.password !== req.body.repeatPassword) return res.status(400).json({error: 'passwords does not match'})
     const data = req.body
     const sign = await api.signUp(data)
     sign ? res.status(200).json({sign}) : res.status(400).json({error: error.message})
