@@ -11,8 +11,8 @@ import { isAuth } from '../middlewares/authMiddleware.js'
 const router = Router()
 
 router.use('/', homeRoute)
-router.use('/info', infoRoute)
-router.use('/chat', chatRoute)
+router.use('/info', isAuth, infoRoute)
+router.use('/chat', isAuth, chatRoute)
 router.use('/auth', authRoute)
 router.use('/products', isAuth, productsRoute)
 router.use('/cart', isAuth, cartRoute)
