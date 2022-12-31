@@ -2,6 +2,7 @@ import 'dotenv/config'
 
 import cookieParser from 'cookie-parser';
 import MongoStore from 'connect-mongo';
+import compression from 'compression'
 import passport from 'passport';
 import session from 'express-session';
 import express from 'express';
@@ -38,9 +39,10 @@ app.set('views', './src/views')
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('src/public'))
-app.use(express.json());
-app.use(morgan('dev'));
+app.use(express.json())
 app.use(cookieParser())
+app.use(morgan('dev'))
+app.use(compression())
 
 app.use(passport.initialize())
 app.use(passport.session())
