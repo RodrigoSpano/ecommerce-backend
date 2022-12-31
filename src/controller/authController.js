@@ -22,7 +22,7 @@ export const signUp = async (req, res) => { //todo middleware para validar q no 
       if(log)
       {
         res.cookie('myAccessToken', log.token, { httpOnly: true })
-        res.status(200).json(log)
+        res.status(200).json({success: "you have been authenticated, visit '/' to get access"})
         return;
       }
       res.status(401).json({error: 'wrong credentials'})
@@ -35,6 +35,7 @@ export const signUp = async (req, res) => { //todo middleware para validar q no 
 
   export const logOut = async (req, res) => {
     try {
+      res.clearCookie('myAccessToken')
       req.session.destroy((error) => {
         if(error) return res.status(400).json({error: error.message})
       })
@@ -43,5 +44,16 @@ export const signUp = async (req, res) => { //todo middleware para validar q no 
       return res.status(500).json({
         error: error.message,
       });
+    }
+  }
+  
+  export const renderLogin = async (req, res) => {
+    try {
+      res.render('login')
+    } catch (error) {
+      return res.status(500).json({
+        error: error.message,
+      });
+      
     }
   }

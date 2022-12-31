@@ -3,8 +3,7 @@ import passport from 'passport';
 
 const router = Router()
 
-router.get('/', passport.authenticate('jwt', { session: true }), (req, res) => {
-  res.redirect('/products');
+router.get('/', passport.authenticate('jwt', { session: true, failureRedirect: '/auth/login', successRedirect: '/products' }), (req, res) => {
 });
 
 export default router;

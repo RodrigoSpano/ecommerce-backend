@@ -5,7 +5,7 @@ import User from '../models/userModel.js';
 const jwtSecret = process.env.JWT_SECRET || 'mySecret'
 
 const cookieExtractor = function (req) {
-  let token = null;
+  let token = null; 
   if (req && req.cookies) token = req.cookies['myAccessToken']
   return token;
 };

@@ -2,12 +2,10 @@ import chatModel from '../models/chatModel.js';
 
 
 export const chatExists = async (req, res, next) => {
-  const email = 'cataconpepe@gmail.com'  //it should be req.user.email
-  const findChat = await chatModel.findOne({email: email})
+  const findChat = await chatModel.findOne({email: req.user.email})
   if(!findChat) {
     const data = {
-      // email: req.user.email,
-      email: email,
+      email: req.user.email,
       messages: []
     }
     const chat = new chatModel(data)

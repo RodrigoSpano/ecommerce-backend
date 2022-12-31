@@ -16,7 +16,6 @@ router.use('/auth', authRoute)
 router.use('/products', isAuth, productsRoute)
 router.use('/cart', isAuth, cartRoute)
 router.use('/order', isAuth, orderRoute)
-router.use('/chat', chatRoute)
-//el chat no esta protegido x el authToken xq al no tener el front de lo demas no puedo mandarle el token por el header
+router.use('/chat', isAuth, chatRoute)
 
 export default router;
