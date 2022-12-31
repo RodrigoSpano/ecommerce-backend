@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   bcrypt: ^5.1.0
   connect-mongo: ^4.6.0
+  cookie-parser: ^1.4.6
   dotenv: ^16.0.3
   ejs: ^3.1.8
   express: ^4.18.2
@@ -14,10 +15,12 @@ specifiers:
   passport: ^0.6.0
   passport-jwt: ^4.0.0
   socket.io: ^4.5.4
+  store2: ^2.14.2
 
 dependencies:
   bcrypt: 5.1.0
   connect-mongo: 4.6.0_express-session@1.17.3
+  cookie-parser: 1.4.6
   dotenv: 16.0.3
   ejs: 3.1.8
   express: 4.18.2
@@ -29,6 +32,7 @@ dependencies:
   passport: 0.6.0
   passport-jwt: 4.0.0
   socket.io: 4.5.4
+  store2: 2.14.2
 
 packages:
 
@@ -1108,8 +1112,21 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
 
+  /cookie-parser/1.4.6:
+    resolution: {integrity: sha512-z3IzaNjdwUC2olLIB5/ITd0/setiaFMLYiZJle7xg5Fe9KWAceil7xszYfHHBtDFYLSgJduS2Ty0P1uJdPDJeA==}
+    engines: {node: '>= 0.8.0'}
+    dependencies:
+      cookie: 0.4.1
+      cookie-signature: 1.0.6
+    dev: false
+
   /cookie-signature/1.0.6:
     resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==}
+    dev: false
+
+  /cookie/0.4.1:
+    resolution: {integrity: sha512-ZwrFkGJxUR3EIoXtO+yVE69Eb7KlixbaeAWfBQB9vVsNn/o+Yw69gBWSSDK825hQNdN+wF8zELf3dFNl/kxkUA==}
+    engines: {node: '>= 0.6'}
     dev: false
 
   /cookie/0.4.2:
@@ -2028,6 +2045,10 @@ packages:
   /statuses/2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
     engines: {node: '>= 0.8'}
+    dev: false
+
+  /store2/2.14.2:
+    resolution: {integrity: sha512-siT1RiqlfQnGqgT/YzXVUNsom9S0H1OX+dpdGN1xkyYATo4I6sep5NmsRD/40s3IIOvlCq6akxkqG82urIZW1w==}
     dev: false
 
   /string-width/4.2.3:

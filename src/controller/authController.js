@@ -2,8 +2,6 @@ import AuthApi from '../api/auth/authApi.js';
 
 const api = new AuthApi()
 
-export let myAccessToken = '' 
-
 export const signUp = async (req, res) => { //todo middleware para validar q no exista el user
   try {
     // make sure password and repeat password matches
@@ -21,8 +19,13 @@ export const signUp = async (req, res) => { //todo middleware para validar q no 
   export const logIn = async (req, res) => {
     try {
       const log = await api.logIn(req.body)
-      myAccessToken = log.token
-      log ? res.status(200).json({log}) : res.status(401).json({error: 'wrong credentials'})
+      if(log)
+      {
+        res.cookie('myAccessToken', log.token, { httpOnly: true })
+        res.status(200).json(log)
+        return;
+      }
+      res.status(401).json({error: 'wrong credentials'})
     } catch (error) {
       return res.status(500).json({
       error: error.message,

@@ -1,10 +1,11 @@
 import 'dotenv/config'
 
-import express from 'express';
-import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
+import MongoStore from 'connect-mongo';
 import passport from 'passport';
 import session from 'express-session';
-import MongoStore from 'connect-mongo';
+import express from 'express';
+import morgan from 'morgan';
 import http from 'http'
 import { Server } from 'socket.io';
 
@@ -35,10 +36,12 @@ app.use(
 app.set('view engine', '.ejs')
 app.set('views', './src/views')
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('src/public'))
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
+app.use(cookieParser())
+
 app.use(passport.initialize())
 app.use(passport.session())
 passport.use(JWTStrategy)
