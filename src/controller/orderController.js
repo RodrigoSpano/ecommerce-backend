@@ -6,6 +6,7 @@ import { emailData, findAdmin } from '../utilities/helpers.js';
 
 const order = new OrderApi();
 
+// se manda por body la informacion del ccarrito, al no tener lado cliente lo mando por postman
 export const createOrder = async (req, res) => {
   try {
     let prods = [];
