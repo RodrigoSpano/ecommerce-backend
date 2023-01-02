@@ -1,6 +1,8 @@
 import OrderApi from '../api/orders/orderApi.js';
 import prodModel from '../models/prodModel.js';
+import { transporter } from '../utilities/nodemailer.js';
 import { nanoid } from 'nanoid';
+import { emailData, findAdmin } from '../utilities/helpers.js';
 
 const order = new OrderApi();
 
@@ -33,6 +35,13 @@ export const createOrder = async (req, res) => {
       date: new Date(),
       orderNumber: nanoid(),
       totalPrice: total,
+    });
+    //send email 'new order!!!'
+    await transporter.sendMail({
+      from: 'from "books ecommerce server 👻"',
+      to: await findAdmin(),
+      subject: 'New order generated!!',
+      html: ` <h1>${req.user.email} has made a purchase:</h1> <h2>ORDER NUMBER: ${createOrder.orderNumber} </h2> <strong> TOTAL PRICE: $${createOrder.totalPrice}</strong>`, // html body
     });
     res.status(200).json({
       success: true,
