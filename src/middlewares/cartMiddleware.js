@@ -1,10 +1,17 @@
 import Cart from '../models/cartModel.js'
 
-export const alreadyExists = async (req, res, next) => {
-  const { prodId } = req.body
-  const findProd = await Cart.findOne({prodId})
-  if(!findProd) return next()
-  res.status(400).json({error: 'already on cart'})
+export const postMiddleware = async (req, res, next) => {
+  const findCart = await Cart.findOne({email: req.user.email})
+  if(!findCart) {
+    const newCartData = {
+      email: req.user.email,
+      date: new Date(),
+      items: []
+    }
+    const cart = new Cart(newCartData)
+    await cart.save()
+  }
+  return next()
 }
 
 export const verifyProd = async (req,res,next) => {

@@ -13,8 +13,8 @@ export const getAll = async (req, res) => {
 
 export const addToCart = async (req, res) => {
   try {
-    const product = await api.addToCart(req.body)
-    res.json({success: true, product})
+    await api.addToCart(req.body)
+    res.json({success: true, message: 'added to cart'})
   } catch (error) {
     res.status(500).json({error:error.message})
   }

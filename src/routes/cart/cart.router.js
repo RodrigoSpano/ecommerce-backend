@@ -5,7 +5,7 @@ import * as cartMiddleware from '../../middlewares/cartMiddleware.js'
 const router = Router()
 
 router.get('/', cartController.getAll)
-router.post('/', cartMiddleware.alreadyExists,cartController.addToCart)
+router.post('/', cartMiddleware.postMiddleware,cartController.addToCart)
 router.put('/:id', cartMiddleware.verifyProd,cartController.updateOne)
 router.delete('/:id', cartMiddleware.verifyProd,cartController.deleteOne)
 router.delete('/', cartController.deleteAll)

@@ -1,8 +1,9 @@
 class CartDto{
-  constructor({_id, prodId, userId, quantity}){
-    this.prodId = prodId
-    this.userId = userId
-    this.quantity = quantity,
+  constructor({_id, date, address, items}){
+    this.email = email
+    this.date = date
+    this.items = items
+    this.address = address
     this._id = _id
   }
 }

@@ -6,8 +6,8 @@ class CartDao{
 
   async getAll(){
     try {
-      const cartProds = await Cart.find({})
-      return asDto(cartProds)
+      const carts = await Cart.findOne({email: req.user.email})
+      return asDto(carts)
     } catch (error) {
       return error
     }
@@ -15,8 +15,7 @@ class CartDao{
 
   async addToCart(data){
     try {
-      const prodCart = new Cart(data)
-      await prodCart.save()
+      const prodCart = await Cart.findOneAndUpdate({email: req.user.email}, {$push: {items: data.items}},{address: data.address})
       return asDto(prodCart)
     } catch (error) {
       return error
@@ -25,7 +24,7 @@ class CartDao{
 
   async updateOne(_id, data){
     try {
-      const prod = await Cart.findOneAndUpdate({_id}, data, {new: true})
+      const prod = await Cart.findOneAndUpdate({_id}, {items: data}, {new: true})
       return asDto(prod)
 
     } catch (error) {
