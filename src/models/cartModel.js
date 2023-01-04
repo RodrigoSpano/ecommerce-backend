@@ -11,7 +11,7 @@ const itemSchema = new Schema({
   }
 })
 
-export const cartSchema = new Schema({
+const cartSchema = new Schema({
   email: {
     type: String,
     required: true

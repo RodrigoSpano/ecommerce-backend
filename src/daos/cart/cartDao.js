@@ -1,53 +1,60 @@
+import cartModel from '../../models/cartModel.js'
 import asDto from './cartDto.js'
-import Cart from '../../models/cartModel.js'
 
-class CartDao{
-  constructor(){}
+class CartDao {
+  constructor() {}
 
-  async getAll(){
+  async getAll() {
     try {
-      const carts = await Cart.findOne({email: req.user.email})
-      return asDto(carts)
+      const carts = await Cart.findOne({ email: req.user.email });
+      return asDto(carts);
     } catch (error) {
-      return error
+      return error;
     }
   }
 
-  async addToCart(data){
+  async addToCart(data) {
     try {
-      const prodCart = await Cart.findOneAndUpdate({email: req.user.email}, {$push: {items: data.items}},{address: data.address})
-      return asDto(prodCart)
+      const prodCart = await Cart.findOneAndUpdate(
+        { email: req.user.email },
+        { $push: { items: data.products } },
+        { $set: { address: data.address } },
+        { new: true }
+      );
+      return asDto(prodCart);
     } catch (error) {
-      return error
+      return error;
     }
   }
 
-  async updateOne(_id, data){
+  async updateOne(_id, data) {
     try {
-      const prod = await Cart.findOneAndUpdate({_id}, {items: data}, {new: true})
-      return asDto(prod)
-
+      const prod = await Cart.findOneAndUpdate(
+        { _id },
+        { items: data },
+        { new: true }
+      );
+      return asDto(prod);
     } catch (error) {
-      return error
+      return error;
     }
   }
 
-  async deleteOne(_id){
+  async deleteOne(_id) {
     try {
-      await Cart.deleteOne({_id})
+      await Cart.deleteOne({ _id });
     } catch (error) {
-      return error
+      return error;
     }
   }
 
-  async deleteAll(){
+  async deleteAll() {
     try {
-      await Cart.deleteMany({})
+      await Cart.deleteMany({});
     } catch (error) {
-      return error
+      return error;
     }
   }
-
 }
 
 export default CartDao

@@ -1,5 +1,5 @@
 class CartDto{
-  constructor({_id, date, address, items}){
+  constructor({_id, date, email, address, items}){
     this.email = email
     this.date = date
     this.items = items
