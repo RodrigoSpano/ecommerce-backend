@@ -1,25 +1,23 @@
-import cartModel from '../../models/cartModel.js'
+import Cart from '../../models/cartModel.js'
 import asDto from './cartDto.js'
 
 class CartDao {
   constructor() {}
 
-  async getAll() {
+  async getAll(email) {
     try {
-      const carts = await Cart.findOne({ email: req.user.email });
+      const carts = await Cart.findOne({ email });
       return asDto(carts);
     } catch (error) {
       return error;
     }
   }
 
-  async addToCart(data) {
+  async addToCart(data, email) {
     try {
       const prodCart = await Cart.findOneAndUpdate(
-        { email: req.user.email },
-        { $push: { items: data.products } },
-        { $set: { address: data.address } },
-        { new: true }
+        { email },
+        { $push: { items: data.items }, address: data.address}, {new: true}
       );
       return asDto(prodCart);
     } catch (error) {
@@ -29,12 +27,7 @@ class CartDao {
 
   async updateOne(_id, data) {
     try {
-      const prod = await Cart.findOneAndUpdate(
-        { _id },
-        { items: data },
-        { new: true }
-      );
-      return asDto(prod);
+      
     } catch (error) {
       return error;
     }

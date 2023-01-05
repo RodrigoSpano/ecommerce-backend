@@ -5,16 +5,16 @@ class CartApi{
     this.dao = new CartDao()
   }
 
-  async getAll(){
-    return await this.dao.getAll()
+  async getAll(email){
+    return await this.dao.getAll(email)
   }
 
-  async addToCart(data){
-    return await this.dao.addToCart(data)
+  async addToCart(data, email){
+    return await this.dao.addToCart(data, email)
   }
 
-  async updateOne(id, data){
-    return await this.dao.updateOne(id, data)
+  async updateOne(){
+    return await this.dao.updateOne()
   }
 
   async deleteOne(id){

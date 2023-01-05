@@ -1,3 +1,4 @@
+import cartModel from '../models/cartModel.js';
 import userModel from '../models/userModel.js';
 
 export const MONGO_CONFIG = {
@@ -20,4 +21,11 @@ export const emailData = async (data) => {
       <li>${el.quantity}</li>
     </ul>`
   ))
+}
+
+export const validateProductCart = async (items, email) => {
+  const searchProd = await cartModel.findOne({email})
+  for(const item of items){
+    return searchProd.items.some(el => el.prodId.toString() === item.prodId.toString())
+  }
 }

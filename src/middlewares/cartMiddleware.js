@@ -6,7 +6,7 @@ export const postMiddleware = async (req, res, next) => {
     const newCartData = {
       email: req.user.email,
       date: new Date(),
-      items: []
+      items: [],
     }
     const cart = new Cart(newCartData)
     await cart.save()
