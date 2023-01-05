@@ -13,8 +13,8 @@ class CartApi{
     return await this.dao.addToCart(data, email)
   }
 
-  async updateOne(){
-    return await this.dao.updateOne()
+  async updateOne(email, prodId){
+    return await this.dao.updateOne(email)
   }
 
   async deleteOne(id){

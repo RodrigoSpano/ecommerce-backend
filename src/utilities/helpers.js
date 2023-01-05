@@ -8,7 +8,6 @@ export const MONGO_CONFIG = {
 
 export const findAdmin = async () => {
   const admin = await userModel.findOne({ admin: true });
-  console.log(admin.email);
   return admin.email;
 };
 

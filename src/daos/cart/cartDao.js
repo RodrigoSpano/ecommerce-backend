@@ -25,9 +25,10 @@ class CartDao {
     }
   }
 
-  async updateOne(_id, data) {
+  async updateOne(email, prodId) {
     try {
-      
+      const cart = await Cart.findOne({email})
+      const findProd = cart.find(el => el.prodId.toString() === prodId)
     } catch (error) {
       return error;
     }

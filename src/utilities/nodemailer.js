@@ -17,21 +17,3 @@ export const transporter = createTransport({
     pass: adminPassword,
   },
 });
-
-// export const sendEmail = async (data) => {
-//   try {
-//     const mailOptions = {
-//       from: 'library server',
-//       to: findAdmin(),
-//       subject: `${data.subject}`,
-//       html: `<h2>${data.html}</h2> <p>${data.email} ${data.fullName}<p>`
-//     }
-//     await transporter.sendMail(mailOptions)
-//   } catch (error) {
-//     console.log(error)
-//   }
-// } 
-
-// transporter.verify().then(() => {
-//   console.log('ready for send emails')
-// })

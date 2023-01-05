@@ -25,7 +25,7 @@ export const addToCart = async (req, res) => {
 
 export const updateOne = async (req, res) => {
   try {
-    const product = await api.updateOne()
+    const product = await api.updateOne(req.user.email, req.params.prodId)
     res.json({success: true, product})
   } catch (error) {
     res.status(500).json({error: error.message})
