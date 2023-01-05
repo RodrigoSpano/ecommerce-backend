@@ -25,26 +25,30 @@ class CartDao {
     }
   }
 
-  async updateOne(email, prodId) {
+  async updateOne(email, prodId, quantity) {
     try {
-      const cart = await Cart.findOne({email})
-      const findProd = cart.find(el => el.prodId.toString() === prodId)
+      await Cart.findOne({email})
+        .then(doc => {
+          const findItem = doc.items.find(el => el.prodId.toString() === prodId)
+          findItem.quantity = quantity
+          doc.save()
+        }).catch(err => console.log(err))
     } catch (error) {
       return error;
     }
   }
 
-  async deleteOne(_id) {
+  async deleteOne(prodId, email) {
     try {
-      await Cart.deleteOne({ _id });
+      await Cart.findOneAndUpdate({email}, {$pull: {items: {prodId: prodId}}}, {new: true})
     } catch (error) {
       return error;
     }
   }
 
-  async deleteAll() {
+  async deleteAll(email) {
     try {
-      await Cart.deleteMany({});
+      await Cart.findOneAndUpdate({email}, {$set: {"items": []}}, {new: true});
     } catch (error) {
       return error;
     }

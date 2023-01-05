@@ -25,7 +25,7 @@ export const addToCart = async (req, res) => {
 
 export const updateOne = async (req, res) => {
   try {
-    const product = await api.updateOne(req.user.email, req.params.prodId)
+    const product = await api.updateOne(req.user.email, req.params.prodId, req.body.quantity)
     res.json({success: true, product})
   } catch (error) {
     res.status(500).json({error: error.message})
@@ -34,9 +34,8 @@ export const updateOne = async (req, res) => {
 
 export const deleteOne = async (req, res) => {
   try {
-    const {id} = req.params
-    await api.deleteOne(id)
-    res.json({success:true, deleted: id})
+    await api.deleteOne(req.params.prodId, req.user.email)
+    res.json({success:true})
   } catch (error) {
     res.status(500).json({error: error.message})
   }
@@ -44,7 +43,7 @@ export const deleteOne = async (req, res) => {
 
 export const deleteAll = async (req, res) => {
   try {
-    await api.deleteAll()
+    await api.deleteAll(req.user.email)
     res.json({success: true})
   } catch (error) {
     res.status(500).json({error: error.message})

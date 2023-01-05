@@ -15,10 +15,13 @@ export const postMiddleware = async (req, res, next) => {
 }
 
 export const verifyProd = async (req,res,next) => {
-  const {id} = req.params
-  await Cart.findOne({_id: id})
-  .then((prod) => {
-    if(prod) return next()
-    res.status(404).json({error: "product doesn't exist"})
-  }).catch(error => res.status(500).json({error: error.message}))
+  await Cart.findOne({email:req.user.email})
+    .then(resp => {
+      if(resp){
+        const findProd = resp.items.some(el => el.prodId.toString() === req.params.prodId)
+        if(!findProd) return res.status(404).json({error: 'product not found'})
+        return next()
+      }
+      return res.status(500).json({error: "cart doesn't exists"})
+    }).catch(err => res.staus(500).json({error: err.message}))
 }

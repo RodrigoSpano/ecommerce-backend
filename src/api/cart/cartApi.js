@@ -13,16 +13,16 @@ class CartApi{
     return await this.dao.addToCart(data, email)
   }
 
-  async updateOne(email, prodId){
-    return await this.dao.updateOne(email)
+  async updateOne(email, prodId, quantity){
+    return await this.dao.updateOne(email, prodId, quantity)
   }
 
-  async deleteOne(id){
-    return await this.dao.deleteOne(id)
+  async deleteOne(prodId, email){
+    return await this.dao.deleteOne(prodId, email)
   }
 
-  async deleteAll(){
-    return await this.dao.deleteAll()
+  async deleteAll(email){
+    return await this.dao.deleteAll(email)
   }
 }
 
