@@ -9,34 +9,31 @@ const order = new OrderApi();
 // se manda por body la informacion del ccarrito, al no tener lado cliente lo mando por postman
 export const createOrder = async (req, res) => {
   try {
-    let prods = [];
-    //update stock in the db
-    for (const el of req.body) {
-      await prodModel.updateOne(
-        { _id: el.prodId },
-        { $inc: { stock: -el.quantity } }
-      );
-      await prodModel.findById(el.prodId).then((resp) => {
-        prods.push({
-          title: resp.title,
-          price: resp.price,
-          quantity: el.quantity,
-          productId: el.prodId,
-        });
-      });
-    }
-    //get the pruchase total
-    let total = await prods.reduce(
-      (acc, el) => (acc += el.price * el.quantity),
-      0
-    );
-    const createOrder = await order.createOrder({
-      products: prods,
-      email: req.user.email,
-      date: new Date(),
-      orderNumber: nanoid(),
-      totalPrice: total,
-    });
+    let prods = []
+
+    for(const item of req.body){
+      await prodModel.findById(item.prodId)
+        .then(resp => {
+          if(resp){
+            const data = {
+              title: resp.title,
+              price: resp.price,
+              quantity: item.quantity
+            }
+            prods.push(data)
+          }
+        })
+        await prodModel.updateOne({_id: item.prodId}, {$inc: {stock: -item.quantity}})
+      }
+      let total = await prods.reduce((acc, el) => (acc += el.price * el.quantity), 0)
+
+      const createOrder = await order.createOrder({
+        products: prods,
+        email: req.user.email,
+        date: new Date(),
+        orderNumber: nanoid(),
+        totalPrice: total
+      })
     //send email 'new order!!!'
     await transporter.sendMail({
       from: 'from "books ecommerce server 👻"',
