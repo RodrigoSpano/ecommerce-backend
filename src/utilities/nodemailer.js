@@ -11,9 +11,9 @@ export const transporter = createTransport({
   secure: true,
   logger: true,
   debug: true,
-  ignoreTLS: true,
   auth: {
     user: adminEmail,
     pass: adminPassword,
   },
+  tls : { rejectUnauthorized: false }
 });

@@ -6,8 +6,11 @@ export const MONGO_CONFIG = {
   useNewUrlParser: true
 }
 
+const alternativeMail = process.env.ALTERNATIVE_MAIL
+
 export const findAdmin = async () => {
   const admin = await userModel.findOne({ admin: true });
+  if(!admin) return alternativeMail
   return admin.email;
 };
 
